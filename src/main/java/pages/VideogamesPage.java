@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
+import pages.components.SearchResult;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -30,9 +31,11 @@ public class VideogamesPage extends PagesBase{
     WebElement priceHighToLowFilter;
 
     @FindBy(xpath = "//div[@data-component-type=\"s-search-result\"]")
-    List<WebElement> searchResultsList;
+    List<WebElement> searchResults;
 
-    HashMap<String, Integer> productsAddedToCartList = new HashMap<>();
+    SearchResult searchResult;
+
+    HashMap<String, Integer> productsAddedToCart = new HashMap<>();
 
     @FindBy(xpath = "//span[@class=\"a-list-item\"]//a[(text() = '2')]")
     WebElement secondSearchResultsPageLink;
@@ -58,52 +61,29 @@ public class VideogamesPage extends PagesBase{
 
     public HashMap<String, Integer> addItemsToCart(){
         /*
-            INITIALIZE
-         */
-        WebElement productTitleElement;
-        String productTitle;
-        WebElement productPriceElement;
-        int productPrice;
-        WebElement addToCartBtn;
-
-        /*
             LOOP OVER THE PRODUCTS
          */
-        for (WebElement searchResult : searchResultsList) {
-            commandsHandler.scrollTo(searchResult);
+        for (WebElement result : searchResults) {
+            this.searchResult = new SearchResult(driver, result);
+//            wait.until(ExpectedConditions.visibilityOf(this.searchResult.searchResult));
+
             System.out.println("Scrolling search results ...");
+            commandsHandler.scrollTo(searchResult.searchResult);
 
-            try {
-                productTitleElement = searchResult.findElement(By.xpath(".//div[@data-cy=\"title-recipe\"]"));
-                productPriceElement = searchResult.findElement(By.className("a-price-whole")); // throws an exception if the price element is not found
-                addToCartBtn = searchResult.findElement(By.xpath(".//button[text()='Add to cart']")); // throws an exception if the button element not found
-
-                productTitle = productTitleElement.getText();
-                productPrice = Integer.parseInt(productPriceElement.getText().replace(",", ""));
-
-                /*
-                    ADD SUITABLE ITEMS TO CART
-                 */
-                if (productPrice < 15000)
-                {
-                    System.out.println("************ Price is less than 15000 ************");
-                    productsAddedToCartList.put(productTitle, productPrice);
-
-                    commandsHandler.scrollTo(addToCartBtn);
-                    commandsHandler.click(addToCartBtn);
-                }
-            }
-            catch (NoSuchElementException e) {
-                System.out.println("Either this product does NOT have a price or it does NOT have an Add to Cart button");
-//                System.out.println(e.getMessage());
+            /*
+                ADD SUITABLE ITEMS TO CART
+             */
+            if (searchResult.price < 15000)
+            {
+                System.out.println("************ Price is less than 15000 ************");
+                if (searchResult.addToCart()) productsAddedToCart.put(searchResult.title, searchResult.price);
             }
         }
 
         // essential-step
         driver.navigate().refresh();
-        return productsAddedToCartList;
+        return productsAddedToCart;
     }
-
     public VideogamesPage goToSecondSearchResultsPage(){
         commandsHandler.click(secondSearchResultsPageLink);
 
