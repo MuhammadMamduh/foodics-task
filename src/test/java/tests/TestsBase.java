@@ -62,12 +62,7 @@ public class TestsBase {
     @AfterSuite
     public void stopDriver()
     {
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        driver.quit(); // closes all browser windows which are running & will end the webdriver session.
+        driver.quit(); // closes all browser windows which are running & will end the webdriver session.
 //        driver.close(); // Will close only the currently focused window/tab
     }
 }
