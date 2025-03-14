@@ -44,6 +44,7 @@ public class VideogamesPage extends PagesBase{
 
 
     public VideogamesPage applyFilters(){
+        log.info("Applying filters in [VideogamesPage]");
         commandsHandler.click(freeShippingChkbx);
         commandsHandler.click(NewConditionBtn);
 
@@ -51,6 +52,7 @@ public class VideogamesPage extends PagesBase{
     }
 
     public VideogamesPage sort(){
+        log.info("Sorting results in [VideogamesPage]");
         Select dropdown = new Select(sortingDropdown);
 
         commandsHandler.clickObscured(sortingDropdown);
@@ -62,6 +64,7 @@ public class VideogamesPage extends PagesBase{
     }
 
     public HashMap<String, Integer> addItemsToCart(){
+        log.info("Adding items to cart from [VideogamesPage]");
         /*
             LOOP OVER THE PRODUCTS
          */

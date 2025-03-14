@@ -23,11 +23,13 @@ public class CartPage extends PagesBase {
 
 
     public int countCartItems() {
+        log.info("Getting the count of the cart items in [CartPage]");
         System.out.println("# Cart Items: " + cartItems.size());
         return cartItems.size();
     }
 
     public int calculateCartSum() {
+        log.info("Looping over cart items and calculating cart sum in [CartPage]");
         int sum = 0;
         String priceStr;
         for (WebElement cartItem : cartItems) {
@@ -43,6 +45,7 @@ public class CartPage extends PagesBase {
     }
 
     public int getActualSubTotal() {
+        log.info("Getting the actual subtotal in [CartPage]");
         String priceStr = cartSubTotal.getText();
         priceStr = priceStr.replace("EGP", "");
         priceStr = priceStr.replace(",", "");

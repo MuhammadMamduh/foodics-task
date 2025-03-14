@@ -41,7 +41,9 @@ public class LoginTest extends TestsBase {
         int  subtotal_actual = cartPage.getActualSubTotal();
 
 
+        log.info("(1) VALIDATING THAT: actual number of items in the cart =" + noOfItemsInTheCart_actual + " equals the expected = " + noOfItemsAddedToTheCart_expected);
         Assert.assertEquals(noOfItemsInTheCart_actual, noOfItemsAddedToTheCart_expected);
+        log.info("(2) VALIDATING THAT: total price of the items in the cart =" + subtotal_actual + " equals the expected = " + sumOfItemsInTheCart_expected);
         Assert.assertEquals(subtotal_actual, sumOfItemsInTheCart_expected);
     }
 }

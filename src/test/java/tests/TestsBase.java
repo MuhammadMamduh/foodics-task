@@ -22,7 +22,7 @@ public class TestsBase {
     public static WebDriver driver ;
     public static WebDriverWait wait;
     public static Logger log;
-
+    public  String testCaseName;
     public static String downloadPath = System.getProperty("user.dir") + "\\Downloads";
 
     @BeforeSuite
@@ -42,6 +42,15 @@ public class TestsBase {
     // ***********************************************
     // ***********************************************
     // ***********************************************
+
+    @BeforeMethod
+    public void beforeMethod(ITestResult result) {
+        testCaseName = result.getMethod().getMethodName();
+        System.out.println("Currently Executing TestCase: " + testCaseName);
+        log.info("Currently Executing TestCase: " + testCaseName);
+        System.out.println("==================================================");
+        log.info("==================================================");
+    }
 
     @AfterMethod
     public void screenshotOnFailure(ITestResult result)
