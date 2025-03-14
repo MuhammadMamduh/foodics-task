@@ -1,0 +1,5 @@
+2025-03-14 03:09:38,899 [main] INFO  pages.HomePage - Navigating to Videogames Pagexxxxxxxx
+2025-03-14 03:09:38,900 [main] INFO  pages.HomePage - This is an info message.
+2025-03-14 03:09:38,900 [main] WARN  pages.HomePage - This is a warning message.
+2025-03-14 03:09:38,900 [main] ERROR pages.HomePage - This is an error message.
+2025-03-14 03:09:38,900 [main] FATAL pages.HomePage - This is a fatal message.

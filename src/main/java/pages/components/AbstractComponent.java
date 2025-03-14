@@ -1,5 +1,6 @@
 package pages.components;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -13,6 +14,7 @@ public abstract class AbstractComponent {
     protected WebDriver driver;
     protected JavascriptExecutor jse;
     protected CommandsHandler commandsHandler;
+    public static Logger log;
 
     public AbstractComponent(final WebDriver driver){
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));

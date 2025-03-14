@@ -9,6 +9,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import utils.PropertiesReader;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ import java.util.Properties;
 import static org.hamcrest.Matchers.equalTo;
 
 public class APITests {
+
+    SoftAssert softAssert = new SoftAssert();
     Map<String, Object> createdUser = new HashMap<>();
 
     @BeforeSuite
@@ -46,7 +49,7 @@ public class APITests {
         createdUser.put("id", createdUserId);
     }
 
-    @Test(priority = 2, enabled = false)
+    @Test(priority = 2)
     public void retrieveUser() {
         System.out.println("<<<<<<<<< retrieveUser >>>>>>>>");
         Response response = RestAssured.given()
@@ -55,14 +58,19 @@ public class APITests {
         // simple logging
         response.getBody().prettyPrint();
 
-        response.then()
-                .statusCode(200)
-                .body("data.id", equalTo(createdUser.get("id")))
-                .body("data.name", equalTo(createdUser.get("name")))
-                .body("data.job", equalTo(createdUser.get("job")));
+        System.out.println("Verifying Status Code...");
+        softAssert.assertEquals(response.getStatusCode(), 200, "Status code mismatch");
+
+        System.out.println("Verifying Response Body...");
+        softAssert.assertEquals(response.jsonPath().getString("data.id"), createdUser.get("id"), "ID mismatch");
+        softAssert.assertEquals(response.jsonPath().getString("data.name"), createdUser.get("name"), "Name mismatch");
+        softAssert.assertEquals(response.jsonPath().getString("data.job"), createdUser.get("job"), "Job mismatch");
+
+        // Assert all to report the failures
+        softAssert.assertAll();
     }
 
-    @Test(priority = 3, enabled = false)
+    @Test(priority = 3)
     public void updateUser() {
         System.out.println("<<<<<<<<< updateUser >>>>>>>>");
         Response response = RestAssured.given()
@@ -72,10 +80,16 @@ public class APITests {
         // simple logging
         response.getBody().prettyPrint();
 
-        response.then()
-                .statusCode(200)
-                .body("name", equalTo(createdUser.get("name")))
-                .body("job", equalTo(createdUser.get("job")))
-                ;
+
+
+        System.out.println("Verifying Status Code...");
+        softAssert.assertEquals(response.getStatusCode(), 200, "Status code mismatch");
+
+        System.out.println("Verifying Response Body...");
+        softAssert.assertEquals(response.jsonPath().getString("name"), createdUser.get("name"), "Name mismatch");
+        softAssert.assertEquals(response.jsonPath().getString("job"), createdUser.get("job"), "Job mismatch");
+
+        // Assert all to report the failures
+        softAssert.assertAll();
     }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class VideogamesPage extends PagesBase{
     public VideogamesPage(WebDriver driver) {
         super(driver);
+        log = LogManager.getLogger(VideogamesPage.class);
     }
 
     @FindBy(xpath = "//ul[@aria-labelledby=\"p_n_free_shipping_eligible-title\"]")
@@ -85,6 +87,7 @@ public class VideogamesPage extends PagesBase{
         return productsAddedToCart;
     }
     public VideogamesPage goToSecondSearchResultsPage(){
+        log.info("Navigating to [SecondSearchResultsPage]");
         commandsHandler.click(secondSearchResultsPageLink);
 
         // essential-step

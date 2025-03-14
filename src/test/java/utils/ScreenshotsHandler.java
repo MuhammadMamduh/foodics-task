@@ -20,7 +20,7 @@ public class ScreenshotsHandler {
         File File = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         try {
-            FileUtils.copyFile(File, new File("src/test/execution-results/"  + FileName + ".jpeg"));
+            FileUtils.copyFile(File, new File("src/test/execution-results/screenshots/"  + FileName + ".jpeg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

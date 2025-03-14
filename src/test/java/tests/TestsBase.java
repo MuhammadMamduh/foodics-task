@@ -1,5 +1,6 @@
 package tests;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.bidi.browsingcontext.BrowsingContext;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +21,7 @@ public class TestsBase {
 
     public static WebDriver driver ;
     public static WebDriverWait wait;
+    public static Logger log;
 
     public static String downloadPath = System.getProperty("user.dir") + "\\Downloads";
 

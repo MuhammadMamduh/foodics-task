@@ -1,5 +1,6 @@
 package pages.components;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,7 @@ import pages.VideogamesPage;
 public class Sidebar extends AbstractComponent{
     public Sidebar(final WebDriver driver){
         super(driver);
+        log = LogManager.getLogger(Sidebar.class);
     }
 
     @FindBy(id = "hmenu-canvas")
@@ -28,6 +30,7 @@ public class Sidebar extends AbstractComponent{
 
 
     public VideogamesPage openVideogamesPage() {
+        log.info("Opening [VideogamesPage]");
         commandsHandler.click(navSeeAllBtn);
         commandsHandler.click(navVideogamesBtn);
         commandsHandler.clickObscured(subNavAllvideogamesBtn);

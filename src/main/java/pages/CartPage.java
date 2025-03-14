@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ public class CartPage extends PagesBase {
 
     public CartPage(WebDriver driver) {
         super(driver);
+        log = LogManager.getLogger(CartPage.class);
     }
 
     @FindBy(className = "sc-list-item-content")

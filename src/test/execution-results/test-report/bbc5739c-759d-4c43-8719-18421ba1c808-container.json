@@ -1,0 +1,1 @@
+{"uuid":"bbc5739c-759d-4c43-8719-18421ba1c808","name":"API Regression Suite","children":["3d6e0dc4-ecc4-4905-b1e0-eb99234a19b8"],"befores":[{"name":"setBaseUrl","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1741918306808,"stop":1741918306937}],"afters":[],"start":1741918306808,"stop":1741918308934}

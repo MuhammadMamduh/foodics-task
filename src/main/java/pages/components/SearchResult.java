@@ -1,5 +1,6 @@
 package pages.components;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class SearchResult extends AbstractComponent {
 
     public SearchResult(final WebDriver driver, WebElement element) {
         super(driver);
+        log = LogManager.getLogger(SearchResult.class);
         this.searchResult = element;
 
         titleElement = searchResult.findElement(By.xpath(".//div[@data-cy=\"title-recipe\"]"));
