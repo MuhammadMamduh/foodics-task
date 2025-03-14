@@ -1,4 +1,0 @@
-2025-03-14 03:54:16,835 [main] INFO  pages.components.Sidebar - Opening [sidebar]
-2025-03-14 03:54:17,112 [main] INFO  pages.components.Sidebar - Opening [VideogamesPage]
-2025-03-14 03:54:46,814 [main] INFO  pages.VideogamesPage - Navigating to [SecondSearchResultsPage]
-2025-03-14 03:55:03,159 [main] INFO  pages.components.SearchResult - Opening [CartPage]
