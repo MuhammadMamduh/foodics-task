@@ -9,4 +9,4 @@ I've created 2 independent Test Suites to run the tests, one for the APIs and th
 I've used the properties file to store the API base URL.
 I've used the log4j2 library to generate readable logs (src/test/execution-results/logs).
 I've used allure reports to generate clean test reports (src/test/execution-results/test-report).
-I've created a simple bash script as the entrypoint to run the framework.
+I've created a simple bash script as the entrypoint to run the framework (./starter.sh).
