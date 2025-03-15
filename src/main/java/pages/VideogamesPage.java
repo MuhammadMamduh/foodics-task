@@ -63,8 +63,8 @@ public class VideogamesPage extends PagesBase{
         return this;
     }
 
-    public HashMap<String, Integer> addItemsToCart(){
-        log.info("Adding items to cart from [VideogamesPage]");
+    public HashMap<String, Integer> addSuitableItemsToCart(){
+        log.info("Adding items to cart if conditions are met, from [VideogamesPage]");
         /*
             LOOP OVER THE PRODUCTS
          */
@@ -72,12 +72,14 @@ public class VideogamesPage extends PagesBase{
             this.searchResult = new SearchResult(driver, result);
 //            wait.until(ExpectedConditions.visibilityOf(this.searchResult.searchResult));
 
-            System.out.println("Scrolling search results ...");
+            System.out.println("Scrolling search results ... " + searchResult.printProductInfo());
+            log.info("Scrolling search results ...  " + searchResult.printProductInfo());
             commandsHandler.scrollTo(searchResult.searchResult);
 
             /*
                 ADD SUITABLE ITEMS TO CART
              */
+            // searchResult.hasPrice && searchResult.hasAddToCartBtn
             if (searchResult.price < 15000)
             {
                 System.out.println("************ Price is less than 15000 ************");

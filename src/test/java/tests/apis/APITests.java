@@ -4,12 +4,16 @@ import io.opentelemetry.api.trace.StatusCode;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.ITestResult;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import tests.LoginTest;
 import utils.PropertiesReader;
 
 import java.util.HashMap;
@@ -22,10 +26,21 @@ public class APITests {
 
     SoftAssert softAssert = new SoftAssert();
     Map<String, Object> createdUser = new HashMap<>();
+    public static Logger log = LogManager.getLogger(APITests.class);
+    public  String testCaseName;
 
     @BeforeSuite
-    public static void setBaseUrl() {
+    public void setBaseUrl() {
         RestAssured.baseURI = PropertiesReader.apiProperties.getProperty("baseurl");
+    }
+
+    @BeforeMethod
+    public void beforeMethod(ITestResult result) {
+        testCaseName = result.getMethod().getMethodName();
+        System.out.println("Currently Executing TestCase: " + testCaseName);
+        log.info("Currently Executing TestCase: " + testCaseName);
+        System.out.println("==================================================");
+        log.info("==================================================");
 
     }
 
@@ -43,6 +58,7 @@ public class APITests {
 
         // simple logging
         response.getBody().prettyPrint();
+        log.info("Response: " + response.getBody().asString());
 
         response.then().statusCode(201);
         String createdUserId = response.jsonPath().getString("id");
@@ -57,6 +73,7 @@ public class APITests {
 
         // simple logging
         response.getBody().prettyPrint();
+        log.info("Response: " + response.getBody().asString());
 
         System.out.println("Verifying Status Code...");
         softAssert.assertEquals(response.getStatusCode(), 200, "Status code mismatch");
@@ -67,7 +84,14 @@ public class APITests {
         softAssert.assertEquals(response.jsonPath().getString("data.job"), createdUser.get("job"), "Job mismatch");
 
         // Assert all to report the failures
-        softAssert.assertAll();
+        try {
+            softAssert.assertAll();
+        } catch (AssertionError e) {
+            String result = e.getMessage();
+            System.out.println("Soft Assertions Result:\n" + result);
+            log.error("Soft Assertions Result:\n" + result);
+            Assert.fail(result);
+        }
     }
 
     @Test(priority = 3)
@@ -79,7 +103,7 @@ public class APITests {
 
         // simple logging
         response.getBody().prettyPrint();
-
+        log.info("Response: " + response.getBody().asString());
 
 
         System.out.println("Verifying Status Code...");
@@ -90,6 +114,13 @@ public class APITests {
         softAssert.assertEquals(response.jsonPath().getString("job"), createdUser.get("job"), "Job mismatch");
 
         // Assert all to report the failures
-        softAssert.assertAll();
+        try {
+            softAssert.assertAll();
+        } catch (AssertionError e) {
+            String result = e.getMessage();
+            System.out.println("Soft Assertions Result:\n" + result);
+            log.error("Soft Assertions Result:\n" + result);
+            Assert.fail(result);
+        }
     }
 }

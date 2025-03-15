@@ -24,7 +24,7 @@ public class CartPage extends PagesBase {
 
     public int countCartItems() {
         log.info("Getting the count of the cart items in [CartPage]");
-        System.out.println("# Cart Items: " + cartItems.size());
+        System.out.println("Number of Cart Items: " + cartItems.size());
         return cartItems.size();
     }
 
@@ -39,6 +39,7 @@ public class CartPage extends PagesBase {
             priceStr = priceStr.replace(",", "");
             priceStr = priceStr.replace(".00", "");
             System.out.println(priceStr);
+            log.info(priceStr);
             sum += Integer.parseInt(priceStr);
         }
         return sum;
@@ -52,6 +53,7 @@ public class CartPage extends PagesBase {
         priceStr = priceStr.replace(".00", "");
         priceStr = priceStr.replaceAll(" ", "");
         System.out.println(priceStr);
+        log.info(priceStr);
         return Integer.parseInt(priceStr);
     }
 }
