@@ -39,9 +39,9 @@ This framework is designed to automate the testing of both the UI and API functi
 ## ⚙️ Configuration
 
 - **Properties File**: Stores the API base URL for easy configuration.
-- **Log Management**: Integrated with `log4j2` to generate readable logs at:  
+- **Log Management**: Integrated with `log4j2` to generate readable logs at:  `src/test/execution-results/logs`
 
-- **Test Reporting**: Generates clean and detailed test reports using **Allure Reports** at:  src/test/execution-results/test-report
+- **Test Reporting**: Generates clean and detailed test reports using **Allure Reports** at:  `src/test/execution-results/test-report`
 - 
 
 ## 🚀 Running the Tests
